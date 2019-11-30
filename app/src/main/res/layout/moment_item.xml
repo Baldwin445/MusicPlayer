@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/moment_item_bg">
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:scrollHorizontally="false"
+        android:layout_below="@id/thumbnail"/>
+
+    <ImageView
+        android:id="@+id/profilePhoto"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_below="@id/describe"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:id="@+id/nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13.5dp"
+        android:layout_toEndOf="@+id/profilePhoto"
+        android:layout_alignBottom="@id/profilePhoto"
+        android:layout_marginLeft="2dp"
+        android:textColor="#929292"/>
+
+
+
+
+</RelativeLayout>
