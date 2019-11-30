@@ -48,15 +48,6 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentAdapter.ViewHolder
         Moment moment = mMomentList.get(position);
         holder.describe.setText(moment.getDescribe());
         holder.nickname.setText(moment.getNickname());
-
-        //获取item高度，计算图片等比例缩放后的高度，为imageView设置参数
-//        RelativeLayout.LayoutParams layoutParams =
-//                (RelativeLayout.LayoutParams) holder.thumbnail.getLayoutParams();
-//        float itemWidth = (ScreenUtils.getScreenWidth(holder.itemView.getContext()) - 5*3)/2;
-//        layoutParams.width = (int) itemWidth;
-//        float scale = (itemWidth+0f)/holder.thumbnail.;
-
-
         holder.thumbnail.setImageResource(moment.getThumbnailId());
         holder.profilePhoto.setImageResource(moment.getProfilePhotoId());
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class TitleLayout extends RelativeLayout {
     private Button info, search;
     private TextView mine, find, communicate;
+
     public TitleLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.title,this);
@@ -26,6 +27,9 @@ public class TitleLayout extends RelativeLayout {
         mine = (TextView)findViewById(R.id.mine);
         find = (TextView)findViewById(R.id.find);
         communicate = (TextView)findViewById(R.id.communicate);
+
+        mine.setTextSize(16);
+        mine.setTypeface(Typeface.DEFAULT_BOLD);
 
         buttonEvent();
         textViewEvent();
@@ -60,6 +64,14 @@ public class TitleLayout extends RelativeLayout {
                 communicate.setTextSize(14);
                 communicate.setTypeface(Typeface.DEFAULT);
 
+                new Thread(){
+                    @Override
+                    public void run() {
+                        MainActivity main = (MainActivity) getContext();
+                        main.replaceFragment(new SongFragment());
+                    }
+                }.start();
+
                 Log.d("Tips","你点击了\"我的\"标签页");
             }
         });
@@ -85,6 +97,15 @@ public class TitleLayout extends RelativeLayout {
                 mine.setTypeface(Typeface.DEFAULT);
                 find.setTextSize(14);
                 find.setTypeface(Typeface.DEFAULT);
+
+                new Thread(){
+                    @Override
+                    public void run() {
+                        MainActivity main = (MainActivity) getContext();
+                        main.replaceFragment(new MomentFragment());
+                    }
+                }.start();
+
                 Log.d("Tips","你点击了\"音村\"标签页");
 
             }
