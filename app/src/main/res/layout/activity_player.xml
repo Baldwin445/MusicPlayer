@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_player"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="player.PlayerActivity">
+
+    <player.PlayerTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/playerTitle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressText"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:textSize="12dp"
+        android:text="00:00"
+        android:layout_marginLeft="10dp"/>
+
+    <SeekBar
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/progressText"
+        android:id="@+id/progress"
+        android:layout_centerHorizontal="true" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lengthText"
+        android:text="00:00"
+        android:textSize="12dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@+id/progress"
+        android:layout_toEndOf="@+id/progress" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/start"
+        android:id="@+id/play"
+        android:onClick="playMusicControl"
+        android:layout_below="@+id/progress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/last"
+        android:layout_marginBottom="22.5dp"
+        android:id="@+id/lastSong"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/play"
+        android:layout_marginRight="75dp"/>
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/next"
+        android:layout_marginBottom="22.5dp"
+        android:id="@+id/nextSong"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@id/play"
+        android:layout_marginLeft="75dp"/>
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f3a5a"
+    >
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/backto"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/backto"
+        android:onClick="backTo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song_name"
+        android:textSize="16sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/backto"
+        android:textColor="#FFFFFF"
+        android:id="@+id/song_name"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#909FB6"
+        android:text="Singer_name"
+        android:layout_toEndOf="@id/backto"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/song_name"
+        android:id="@+id/singer_name"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/share"
+        android:id="@+id/share"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        />
+
+
+
+</RelativeLayout>

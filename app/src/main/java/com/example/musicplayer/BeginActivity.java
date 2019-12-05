@@ -37,13 +37,10 @@ public class BeginActivity extends AppCompatActivity {
                         }
                     });
                     try{
-                        Thread.sleep(50);
+                        Thread.sleep(40);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-
-                    Log.d("Progress", progress+"");
-
                 }
                 change();
             }

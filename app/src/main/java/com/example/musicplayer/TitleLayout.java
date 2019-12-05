@@ -20,7 +20,7 @@ public class TitleLayout extends RelativeLayout {
 
     public TitleLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.title,this);
+        LayoutInflater.from(context).inflate(R.layout.main_title,this);
 
         info = (Button) findViewById(R.id.info);
         search = (Button) findViewById(R.id.search);
