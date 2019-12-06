@@ -1,0 +1,9 @@
+<litepal>
+    <dbname value = "SongList"/>
+    <version value = "1"/>
+
+    <list>
+        <mapping class = "dbconnect.SongInfo"/>
+    </list>
+
+</litepal>

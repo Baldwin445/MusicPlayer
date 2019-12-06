@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import dbconnect.SongInfo;
 import player.PlayerActivity;
 
 /**
@@ -46,7 +50,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
                 //进入播放页
                 int position = holder.getAdapterPosition();
                 Song song = mSongList.get(position);
-                PlayerActivity.actionStart(v.getContext(), song.getName(), song.getSinger());
+                Log.d("ClickPosition", position+"");
+
+                List<SongInfo> list = DataSupport.select("fileName, title, artist, url")
+                        .find(SongInfo.class);
+                PlayerActivity.actionStart(v.getContext(), list, position);
             }
         });
         return holder;
@@ -64,4 +72,5 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         holder.singer.setText(song.getSinger());
 
     }
+
 }

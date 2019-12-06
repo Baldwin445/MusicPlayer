@@ -1,6 +1,7 @@
 package player;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -22,34 +24,37 @@ import com.example.musicplayer.R;
 
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import dbconnect.SongInfo;
 
 public class PlayerActivity extends AppCompatActivity {
-    private PlayerTitle playerTitle;
-    private Intent intent;
     private MediaPlayer mediaPlayer = new MediaPlayer();
-    private int songLength;
     private ImageView play;
     private TextView lengthText, progressText;
     private SeekBar progress;
+    //音乐长度
+    private int songLength;
+    //播放是否暂停
     private boolean isPause;
+    //播放模式 0：列表循环 1：单曲循环
     private int playmode = 0;
+    //当前播放列表所在位置
+    private int location = -1;
+    //音乐播放列表信息
+    private List<SongInfo> songList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        //初始化对象
-        playerTitle = (PlayerTitle) findViewById(R.id.playerTitle);
-        lengthText = (TextView)findViewById(R.id.lengthText);
-        intent = getIntent();
-        progress = (SeekBar) findViewById(R.id.progress);
-        play = (ImageView) findViewById(R.id.play);
-        progressText = (TextView) findViewById(R.id.progressText);
-
+        //初始化界面信息
         //设置标题歌曲信息
-        playerTitle.setSingerName(intent.getStringExtra("singerName"));
-        playerTitle.setSongName(intent.getStringExtra("songName"));
+        initUI();
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED){
@@ -63,6 +68,8 @@ public class PlayerActivity extends AppCompatActivity {
         //调用方法
         progressControl();
         playListener();
+        backTo();
+        errorListen();
 
     }
 
@@ -77,7 +84,13 @@ public class PlayerActivity extends AppCompatActivity {
         intent.putExtra("songName", songName);
         intent.putExtra("singerName", singerName);
         context.startActivity(intent);
+    }
 
+    public static void actionStart(Context context, List<SongInfo> list, int location){
+        Intent intent = new Intent(context, PlayerActivity.class);
+        intent.putExtra("SongList", (Serializable)list);
+        intent.putExtra("Location", location);
+        context.startActivity(intent);
     }
 
     /**
@@ -86,7 +99,6 @@ public class PlayerActivity extends AppCompatActivity {
     public void playMusicControl(View view){
         if(mediaPlayer.isPlaying()) {
             //暂停
-            Log.d("isPause", isPause+"");
             play.setImageResource(R.drawable.start);
             mediaPlayer.pause();
             isPause = true;
@@ -105,13 +117,21 @@ public class PlayerActivity extends AppCompatActivity {
      */
     private void initMediaPlayer(){
         try{
-            File file = new File(Environment.getExternalStorageDirectory(),"rather_be.mp3");
+//            File file = new File(Environment.getExternalStorageDirectory(),
+//                                    songList.get(location).getFileName());
+            File file = new File(songList.get(location).getUrl());
             mediaPlayer.setDataSource(file.getPath());
             mediaPlayer.prepare();
 
             //获取时间长度
             songLength = mediaPlayer.getDuration();
             lengthText.setText(stringForTime(songLength));
+
+            //设置title
+            PlayerTitle playerTitle;
+            playerTitle = (PlayerTitle) findViewById(R.id.playerTitle);
+            playerTitle.setSingerName(songList.get(location).getArtist());
+            playerTitle.setSongName(songList.get(location).getTitle());
 
         }catch (Exception e){
             e.printStackTrace();
@@ -149,6 +169,7 @@ public class PlayerActivity extends AppCompatActivity {
         super.onDestroy();
         if(mediaPlayer != null){
             mediaPlayer.stop();
+            mediaPlayer.reset();
             mediaPlayer.release();
         }
     }
@@ -198,9 +219,7 @@ public class PlayerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -217,8 +236,17 @@ public class PlayerActivity extends AppCompatActivity {
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.stop();
-                play.setImageResource(R.drawable.start);
+                if(playmode == 0){
+                    location = (location+1)%songList.size();
+                    mediaPlayer.reset();
+
+                    initMediaPlayer();
+                }
+                else {
+                    mediaPlayer.reset();
+
+                    initMediaPlayer();
+                }
             }
         });
     }
@@ -253,5 +281,166 @@ public class PlayerActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    /**
+     *  返回按钮
+     */
+    private void backTo(){
+        ImageView backto = (ImageView) findViewById(R.id.backto);
+        backto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    /**
+     * 初始化MusicPlayerUI界面
+     */
+    private void initUI(){
+        //初始化对象
+        lengthText = (TextView)findViewById(R.id.lengthText);
+        progress = (SeekBar) findViewById(R.id.progress);
+        play = (ImageView) findViewById(R.id.play);
+        progressText = (TextView) findViewById(R.id.progressText);
+
+        //接收intent设置界面信息
+        Intent intent = getIntent();
+        songList = (List<SongInfo>) intent.getSerializableExtra("SongList");
+        location = intent.getIntExtra("Location", -1);
+
+        Log.d("ListSize", songList.size()+"");
+        Log.d("PlayLocation", location+"");
+
+    }
+
+    /**
+     * 切换播放模式
+     * @param view
+     */
+    public void changePlayMode(View view){
+        ImageView pm = (ImageView) findViewById(R.id.playmode);
+        if(playmode == 0){
+            //设置单曲循环
+            pm.setImageResource(R.drawable.singleloop);
+            playmode = 1;
+        }
+        else{
+            //设置列表循环
+            pm.setImageResource(R.drawable.listloop);
+            playmode = 0;
+        }
+    }
+
+    /**
+     * 下一首
+     * @param view
+     */
+    public void nextSong(View view){
+        location = (location+1)%songList.size();
+        mediaPlayer.reset();
+
+        initMediaPlayer();
+        mediaPlayer.start();
+        play.setImageResource(R.drawable.pause);
+    }
+
+    /**
+     * 上一首
+     * @param view
+     */
+    public void lastSong(View view){
+        location = (location+songList.size()-1)%songList.size();
+        mediaPlayer.reset();
+
+        initMediaPlayer();
+        mediaPlayer.start();
+        play.setImageResource(R.drawable.pause);
+
+    }
+
+    /**
+     * 进行除初始化外的音乐加载
+     */
+    private void switchSong(){
+        try {
+            File file = new File(songList.get(location).getUrl());
+            mediaPlayer.setDataSource(file.getPath());
+            mediaPlayer.prepare();
+
+            //获取时间长度
+            songLength = mediaPlayer.getDuration();
+            lengthText.setText(stringForTime(songLength));
+
+            //设置title
+            PlayerTitle playerTitle;
+            playerTitle = (PlayerTitle) findViewById(R.id.playerTitle);
+            playerTitle.setSingerName(songList.get(location).getArtist());
+            playerTitle.setSongName(songList.get(location).getTitle());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void errorListen(){
+        final String TAG = "ERROR";
+        mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                Log.d(TAG, "OnError - Error code: " + what + " Extra code: " + extra);
+                switch (what) {
+                    case -1004:
+                        Log.d(TAG, "MEDIA_ERROR_IO");
+                        break;
+                    case -1007:
+                        Log.d(TAG, "MEDIA_ERROR_MALFORMED");
+                        break;
+                    case 200:
+                        Log.d(TAG, "MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK");
+                        break;
+                    case 100:
+                        Log.d(TAG, "MEDIA_ERROR_SERVER_DIED");
+                        break;
+                    case -110:
+                        Log.d(TAG, "MEDIA_ERROR_TIMED_OUT");
+                        break;
+                    case 1:
+                        Log.d(TAG, "MEDIA_ERROR_UNKNOWN");
+                        break;
+                    case -1010:
+                        Log.d(TAG, "MEDIA_ERROR_UNSUPPORTED");
+                        break;
+                }
+                switch (extra) {
+                    case 800:
+                        Log.d(TAG, "MEDIA_INFO_BAD_INTERLEAVING");
+                        break;
+                    case 702:
+                        Log.d(TAG, "MEDIA_INFO_BUFFERING_END");
+                        break;
+                    case 701:
+                        Log.d(TAG, "MEDIA_INFO_METADATA_UPDATE");
+                        break;
+                    case 802:
+                        Log.d(TAG, "MEDIA_INFO_METADATA_UPDATE");
+                        break;
+                    case 801:
+                        Log.d(TAG, "MEDIA_INFO_NOT_SEEKABLE");
+                        break;
+                    case 1:
+                        Log.d(TAG, "MEDIA_INFO_UNKNOWN");
+                        break;
+                    case 3:
+                        Log.d(TAG, "MEDIA_INFO_VIDEO_RENDERING_START");
+                        break;
+                    case 700:
+                        Log.d(TAG, "MEDIA_INFO_VIDEO_TRACK_LAGGING");
+                        break;
+                }
+                return false;
+            }
+        });
     }
 }

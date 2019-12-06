@@ -9,6 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
+
+import dbconnect.AudioUtils;
+import dbconnect.SongInfo;
+
 public class BeginActivity extends AppCompatActivity {
     private int progress=0;
     private ProgressBar pb;
@@ -20,13 +27,18 @@ public class BeginActivity extends AppCompatActivity {
         pb = (ProgressBar) findViewById(R.id.pb);
 
         progressUp();
-
+        getSdData();
     }
 
     public void progressUp(){
         new Thread(){
             @Override
             public void run() {
+                try{
+                    Thread.sleep(2000);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 while(progress < 100) {
                     progress += 1;
 
@@ -37,7 +49,7 @@ public class BeginActivity extends AppCompatActivity {
                         }
                     });
                     try{
-                        Thread.sleep(40);
+                        Thread.sleep(50);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -50,6 +62,20 @@ public class BeginActivity extends AppCompatActivity {
     public void change(){
         Intent a = new Intent(this, MainActivity.class);
         startActivity(a);
+
+    }
+
+    //获取sd卡数据信息
+    private void getSdData(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DataSupport.deleteAll(SongInfo.class, "");
+                ArrayList<SongInfo> songs = AudioUtils.getAllSongs(BeginActivity.this);
+                Log.d("ArrayLength",String.valueOf(songs.size()));
+            }
+        }).start();
+
 
     }
 }

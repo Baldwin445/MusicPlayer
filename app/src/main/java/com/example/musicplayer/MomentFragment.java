@@ -9,8 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import dbconnect.SongInfo;
 
 /**
  * Created by Baldwin on 19/11/30.
@@ -78,5 +82,6 @@ public class MomentFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
     }
+
 
 }

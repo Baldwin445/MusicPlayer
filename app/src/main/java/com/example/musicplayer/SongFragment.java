@@ -5,19 +5,24 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import dbconnect.SongInfo;
 
 /**
  * Created by Baldwin on 19/11/30.
  */
 
 public class SongFragment extends Fragment {
-    private List<Song> songList = new ArrayList<>();
+    public List<Song> songList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -30,25 +35,12 @@ public class SongFragment extends Fragment {
 
     //初始化音乐列表
     private void initSongsList(){                                  //初始化音乐列表
-        for(int i = 0; i< 2; i++){
-            Song s1 = new Song("鸡哥学潮汕话", "李冠锋");
-            songList.add(s1);
-            Song s2 = new Song("戏精鸡哥", "李冠锋");
-            songList.add(s2);
-            Song s3 = new Song("鸡哥与天线宝宝", "李冠锋");
-            songList.add(s3);
-            Song s4 = new Song("鸡哥尬唱", "李冠锋");
-            songList.add(s4);
-            Song s5 = new Song("鸡哥KTV", "李冠锋");
-            songList.add(s5);
-            Song s6 = new Song("鸡哥学潮汕话", "李冠锋");
-            songList.add(s6);
-            Song s7 = new Song("戏精鸡哥", "李冠锋");
-            songList.add(s7);
-            Song s8 = new Song("鸡哥与天线宝宝", "李冠锋");
-            songList.add(s8);
-            Song s9 = new Song("鸡哥尬唱", "李冠锋");
-            songList.add(s9);
+        List<SongInfo> list = searchInfo();
+        int size = list.size();
+        Log.d("ListSize", size+"");
+        for(int i = 0; i< size; i++){
+            Song song = new Song(list.get(i).getTitle(), list.get(i).getArtist());
+            songList.add(song);
 
         }
     }
@@ -62,4 +54,16 @@ public class SongFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
+
+    /**
+     * 查询数据库已有书籍信息
+     * @return 返回一个存有书籍信息的list
+     */
+    private List<SongInfo> searchInfo(){
+        List<SongInfo> list = DataSupport.select("fileName, title, artist, url")
+                .find(SongInfo.class);
+        return list;
+    }
+
+
 }

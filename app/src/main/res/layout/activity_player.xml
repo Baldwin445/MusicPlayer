@@ -10,7 +10,28 @@
     <player.PlayerTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/playerTitle"/>
+        android:id="@+id/playerTitle">
+    </player.PlayerTitle>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:srcCompat="@drawable/listloop"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="28dp"
+        android:layout_alignParentBottom="true"
+        android:onClick="changePlayMode"
+        android:id="@+id/playmode" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/record"
+        android:id="@+id/record"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,8 +75,9 @@
         android:layout_height="35dp"
         app:srcCompat="@drawable/last"
         android:layout_marginBottom="22.5dp"
-        android:id="@+id/lastSong"
         android:layout_alignParentBottom="true"
+        android:id="@+id/lastSong"
+        android:onClick="lastSong"
         android:layout_alignRight="@id/play"
         android:layout_marginRight="75dp"/>
 
@@ -66,6 +88,7 @@
         android:layout_marginBottom="22.5dp"
         android:id="@+id/nextSong"
         android:layout_alignParentBottom="true"
+        android:onClick="nextSong"
         android:layout_alignLeft="@id/play"
         android:layout_marginLeft="75dp"/>
 </RelativeLayout>

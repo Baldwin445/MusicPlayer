@@ -16,6 +16,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import dbconnect.AudioUtils;
+import dbconnect.SongInfo;
+
 public class MainActivity extends FragmentActivity {
     private List<Song> songList = new ArrayList<>();
     private List<Moment> momentList = new ArrayList<>();
@@ -25,19 +28,9 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                initSongsList();
-//                initSongsView();
-//            }
-//        }.start();
-
         replaceFragment(new SongFragment());
+
     }
-
-
-
 
     //切换Fragment视图
     public void replaceFragment(Fragment fragment){
@@ -45,6 +38,5 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.change_fragment, fragment).commit();
     }
-
 
 }

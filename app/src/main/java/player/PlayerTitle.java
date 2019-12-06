@@ -2,6 +2,7 @@ package player;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,6 @@ public class PlayerTitle extends RelativeLayout{
         songName = (TextView) findViewById(R.id.song_name);
         singerName = (TextView) findViewById(R.id.singer_name);
 
-        backTo();
     }
 
     public PlayerTitle(Context context){
@@ -51,12 +51,4 @@ public class PlayerTitle extends RelativeLayout{
         return singerName;
     }
 
-    public void backTo(){
-        backto.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((Activity) getContext()).finish();
-            }
-        });
-    }
 }
