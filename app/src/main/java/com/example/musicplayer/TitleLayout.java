@@ -1,6 +1,7 @@
 package com.example.musicplayer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.login.LoginActivity;
 
 /**
  * Created by Baldwin on 19/11/29.
@@ -41,6 +44,8 @@ public class TitleLayout extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 Log.d("Tips", "你点击了个人信息按钮");
+                Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
 

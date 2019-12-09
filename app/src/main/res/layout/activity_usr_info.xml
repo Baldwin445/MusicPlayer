@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_usr_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.login.UsrInfoActivity">
+
+    <com.example.login.UsrInfoTitle
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/usrInfoTitle">
+
+    </com.example.login.UsrInfoTitle>
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/icon"
+        android:layout_below="@id/usrInfoTitle"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:id="@+id/nicknameText"
+        android:text="昵称："
+        android:layout_below="@id/icon"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nickname"
+        android:layout_below="@id/icon"
+        android:textSize="18sp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="20dp"
+
+        android:text="User"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:id="@+id/acctText"
+        android:text="账号："
+        android:layout_below="@id/nickname"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/acct"
+        android:layout_below="@id/nickname"
+        android:textSize="18sp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="20dp"
+
+        android:text="User"
+
+        />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/qionggui"
+        android:id="@+id/vip"
+        android:layout_alignBottom="@id/icon"
+        android:layout_toEndOf="@id/icon" />
+
+
+</RelativeLayout>

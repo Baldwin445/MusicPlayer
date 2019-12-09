@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import dbconnect.AudioUtils;
 import dbconnect.SongInfo;
+import dbconnect.User;
 
 public class BeginActivity extends AppCompatActivity {
     private int progress=0;
@@ -28,6 +29,14 @@ public class BeginActivity extends AppCompatActivity {
 
         progressUp();
         getSdData();
+
+//        User usr2 = new User();
+//        usr2.setAcct("user2");
+//        usr2.setPwd("user2");
+//        usr2.setNickname("心心敢敢");
+//        usr2.setVip("qionggui");
+//        usr2.save();
+//        DataSupport.deleteAll(User.class, "acct = ?", "user2");
     }
 
     public void progressUp(){

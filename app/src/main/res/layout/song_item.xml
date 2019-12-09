@@ -19,4 +19,15 @@
         android:textSize="16sp"
         android:textColor="#909FB6"/>
 
+    <Button
+        android:layout_marginTop="15dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:text="×"
+        android:background="#2f3a5a"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/delete"
+        />
+
 </RelativeLayout>

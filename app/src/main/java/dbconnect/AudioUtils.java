@@ -40,7 +40,7 @@ public class AudioUtils{
                         MediaStore.Audio.Media.DURATION,            //歌曲时长
                         MediaStore.Audio.Media.ARTIST,              //歌曲演唱者
                         MediaStore.Audio.Media.ALBUM,               //专辑名
-                        MediaStore.Audio.Media.DATA},               //歌曲文件大小
+                        MediaStore.Audio.Media.DATA},               //歌曲文件路径
                 MediaStore.Audio.Media.MIME_TYPE + "=? or "
                         + MediaStore.Audio.Media.MIME_TYPE + "=?",
                 new String[] { "audio/mpeg", "audio/x-ms-wma" }, null);
