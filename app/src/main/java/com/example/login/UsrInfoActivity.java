@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.musicplayer.ActivityCollector;
 import com.example.musicplayer.R;
 
 import org.litepal.crud.DataSupport;
@@ -19,6 +20,8 @@ public class UsrInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usr_info);
+        ActivityCollector.addActivity(this);
+
 
         initUI();
     }

@@ -120,6 +120,7 @@ public class PlayerActivity extends AppCompatActivity {
 //            File file = new File(Environment.getExternalStorageDirectory(),
 //                                    songList.get(location).getFileName());
             File file = new File(songList.get(location).getUrl());
+            Log.d("URL", songList.get(location).getUrl());
             mediaPlayer.setDataSource(file.getPath());
             mediaPlayer.prepare();
 
@@ -311,8 +312,8 @@ public class PlayerActivity extends AppCompatActivity {
         songList = (List<SongInfo>) intent.getSerializableExtra("SongList");
         location = intent.getIntExtra("Location", -1);
 
-        Log.d("ListSize", songList.size()+"");
-        Log.d("PlayLocation", location+"");
+//        Log.d("ListSize", songList.size()+"");
+//        Log.d("PlayLocation", location+"");
 
     }
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.musicplayer.ActivityCollector;
 import com.example.musicplayer.R;
 
 /**
@@ -27,8 +28,9 @@ public class UsrInfoTitle extends RelativeLayout{
             @Override
             public void onClick(View v) {
 
-                Activity activity = (Activity)getContext();
-                activity.finish();
+//                Activity activity = (Activity)getContext();
+//                activity.finish();
+                ActivityCollector.finishAll();
             }
         });
     }
