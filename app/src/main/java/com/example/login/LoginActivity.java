@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 int position;
                 if(acct.getText().toString().equals("") || pwd.getText().toString().equals("")){
-
                     return;
                 }
                 position = checkUserInfo(acct.getText().toString(), pwd.getText().toString());

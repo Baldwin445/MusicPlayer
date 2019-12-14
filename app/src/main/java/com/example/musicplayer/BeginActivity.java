@@ -49,7 +49,7 @@ public class BeginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 while(progress < 100) {
-                    progress += 1;
+                    progress += 5;
 
                     BeginActivity.this.runOnUiThread(new Runnable() {
                         @Override

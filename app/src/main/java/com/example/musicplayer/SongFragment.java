@@ -54,7 +54,6 @@ public class SongFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
-
     /**
      * 查询数据库已有书籍信息
      * @return 返回一个存有书籍信息的list

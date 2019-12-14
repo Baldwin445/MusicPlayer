@@ -240,12 +240,10 @@ public class PlayerActivity extends AppCompatActivity {
                 if(playmode == 0){
                     location = (location+1)%songList.size();
                     mediaPlayer.reset();
-
                     initMediaPlayer();
                 }
                 else {
                     mediaPlayer.reset();
-
                     initMediaPlayer();
                 }
             }

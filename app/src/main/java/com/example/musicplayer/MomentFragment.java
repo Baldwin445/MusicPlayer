@@ -40,31 +40,31 @@ public class MomentFragment extends Fragment {
     private void initSquareList(){
         for(int i = 0; i<2; i++){
             Moment a = new Moment(
-                    R.drawable.test1,"ilydsofaeojfijsdfljseoifjasldkjioejfsdlufei",
+                    R.drawable.test3,"究竟为什么进入贰刺螈，想想看，到今天为止我进入二次元最初是因为好奇",
                     R.drawable.testtwo,"LiGuanFeng");
             momentList.add(a);
             Moment b = new Moment(
-                    R.drawable.test2,"sdfa;dkjioejfsdlufei",
+                    R.drawable.test2,"音乐小屋音乐推荐",
                     R.drawable.testone,"YANGLONG");
             momentList.add(b);
             Moment c = new Moment(
-                    R.drawable.test1,"ilydsofaeojfijsdfljseoifjasl;dkjioejfsdlufsdfsfsdfsefsdfafei",
+                    R.drawable.test1,"关于网易云音乐带来给我的美好回忆：我与他正是因为网易云相识",
                     R.drawable.testthree,"LiGuanFeng");
             momentList.add(c);
             Moment d = new Moment(
-                    R.drawable.test3,"程度不太对就是房间阿恩家了省点经费IE加法兰克是大家练腹肌蓝色空间放is对积分lkjsdf",
+                    R.drawable.test3,"但爷Adam Lambert音乐节表演真棒",
                     R.drawable.testthree,"CHENYU");
             momentList.add(d);
             Moment e = new Moment(
-                    R.drawable.test3,"恩家了省点经费IE加法兰克是大家练腹肌蓝色空间放is对积分;dkjioejfsdlufei",
+                    R.drawable.test3,"【安利一首歌曲】",
                     R.drawable.test2,"BIKAQIU");
             momentList.add(e);
             Moment f = new Moment(
-                    R.drawable.test2,"i间放is对积分",
+                    R.drawable.test2,"给大家安利我最喜欢的组合：PTX",
                     R.drawable.testone,"MEI");
             momentList.add(f);
             Moment g = new Moment(
-                    R.drawable.test1,"恩家了省点经费IE加法兰克是大;dkjioejfsdlufei",
+                    R.drawable.test1,"PTX作为一个纯人声乐团，演唱歌曲的范围",
                     R.drawable.testone,"LiGuanFeng");
             momentList.add(g);
 
